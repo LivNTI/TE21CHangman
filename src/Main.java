@@ -27,6 +27,9 @@ public class Main {
         // char aCharacter = 'g'; // this a character
         String word = "teknik";
 
+        // Declaring variables for later use
+        boolean wordCompleted;
+
         //separate the string into a list of the letters
         String[] letters = word.split("");
         printList(letters);
@@ -34,6 +37,7 @@ public class Main {
         // and creat a list for the guessed word
         String[] guessedWord = new String[letters.length];
         int count = 0; // this is a counter
+        // fill the guessed word with "_"
         while (count < guessedWord.length) {
             guessedWord[count] = "_";
             count++;
@@ -45,30 +49,40 @@ public class Main {
 
         //user input
         Scanner myScan = new Scanner(System.in);
-        System.out.print("Guess a letter: ");
-        String guess = myScan.nextLine();
 
-        //System.out.println("user guess is " + guess);
+        do {
+            //get user input
+            System.out.print("Guess a letter: ");
+            String guess = myScan.nextLine();
 
-        //chekc if guess is in the word
-        boolean isInWord = false;
-        for (int i = 0; i < letters.length; i++) {
-            // if guess is correct print the letter
-            if (guess.equals(letters[i])) {
-                //System.out.println("letter exist on index " + i);
-                // guessedWord[i] = letters[i]; //slightly less optimal
-                guessedWord[i] = guess;
-                isInWord = true;
+            //System.out.println("user guess is " + guess);
+
+            wordCompleted = true;
+
+            //chekc if guess is in the word
+            boolean isInWord = false;
+            for (int i = 0; i < letters.length; i++) {
+                // if guess is correct print the letter
+                if (guess.equals(letters[i])) {
+                    //System.out.println("letter exist on index " + i);
+                    // guessedWord[i] = letters[i]; //slightly less optimal
+                    guessedWord[i] = guess;
+                    isInWord = true;
+                }
+                if (guessedWord[i].equals("_")) {
+                    wordCompleted = false;
+                }
             }
-        }
-        if (!isInWord) { // same as isInWord == false
-            // if isInWord == true --> !isInWord == false
-            // if isInWord == false --> !isInWord == true
-            lives--;
+            if (!isInWord) { // same as isInWord == false
+                // if isInWord == true --> !isInWord == false
+                // if isInWord == false --> !isInWord == true
+                lives--;
 
-        }
-        printList(guessedWord);
-        System.out.println(" you now have " + lives + " lives left");
+            }
+            printList(guessedWord);
+            System.out.println(" you now have " + lives + " lives left");
+            // System.out.println("word COmp is " + wordCompleted);
+        } while ((lives > 0) && (wordCompleted == false));
 
     }
 
