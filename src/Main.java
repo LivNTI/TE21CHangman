@@ -29,6 +29,7 @@ public class Main {
 
         // Declaring variables for later use
         boolean wordCompleted;
+        String guess;
 
         //separate the string into a list of the letters
         String[] letters = word.split("");
@@ -51,9 +52,12 @@ public class Main {
         Scanner myScan = new Scanner(System.in);
 
         do {
-            //get user input
-            System.out.print("Guess a letter: ");
-            String guess = myScan.nextLine();
+            do {
+                //get user input
+                System.out.print("Guess a letter: ");
+                guess = myScan.nextLine();
+            } while (!guess.matches("[a-öA-Ö]+")
+                    || guess.length() != 1);
 
             //System.out.println("user guess is " + guess);
 
@@ -63,10 +67,10 @@ public class Main {
             boolean isInWord = false;
             for (int i = 0; i < letters.length; i++) {
                 // if guess is correct print the letter
-                if (guess.equals(letters[i])) {
+                if (guess.equalsIgnoreCase(letters[i])) {
                     //System.out.println("letter exist on index " + i);
                     // guessedWord[i] = letters[i]; //slightly less optimal
-                    guessedWord[i] = guess;
+                    guessedWord[i] = guess.toUpperCase();
                     isInWord = true;
                 }
                 if (guessedWord[i].equals("_")) {
