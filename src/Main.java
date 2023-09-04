@@ -47,7 +47,7 @@ public class Main {
 
             wordCompleted = true;
 
-            //chekc if guess is in the word
+            //check if guess is in the word
             boolean isInWord = false;
             for (int i = 0; i < letters.length; i++) {
                 // if guess is correct print the letter
